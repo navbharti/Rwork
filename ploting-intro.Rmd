@@ -38,6 +38,13 @@ barplot(airquality$Ozone,
 		main = 'Ozone Concenteration in air', 
 		xlab = 'ozone levels', horiz = TRUE) 
 ```
+S.No	Parameter	Description
+1.	H	A vector or matrix which contains numeric values used in the bar chart.
+2.	xlab	A label for the x-axis.
+3.	ylab	A label for the y-axis.
+4.	main	A title of the bar chart.
+5.	names.arg	A vector of names that appear under each bar.
+6.	col	It is used to give colors to the bars in the graph.
 
 ```{r pressure, echo=FALSE}
 # Vertical Bar Plot for 
@@ -45,6 +52,100 @@ barplot(airquality$Ozone,
 barplot(airquality$Ozone, main = 'Ozone Concenteration in air', 
 		xlab = 'ozone levels', col ='blue', horiz = FALSE) 
 ```
+```{r pressure, echo=FALSE}
+# Creating the data for Bar chart  
+H<- c(12,35,54,3,41)  
+# Giving the chart file a name  
+#png(file = "bar_chart.png")  
+# Plotting the bar chart   
+barplot(H)  
+# Saving the file  
+#dev.off()  
+```
+### Labels, Title & Colors
+```{r pressure, echo=FALSE}
+# Creating the data for Bar chart  
+H <- c(12,35,54,3,41)  
+M<- c("Feb","Mar","Apr","May","Jun")  
+  
+# Giving the chart file a name  
+#png(file = "bar_properties.png")  
+  
+# Plotting the bar chart   
+barplot(H,names.arg=M,xlab="Month",ylab="Revenue",col="Green",  
+        main="Revenue Bar chart",border="red")  
+# Saving the file  
+#dev.off()  
+```
+### Group Bar Chart & Stacked Bar Chart
+```{r pressure,echo=FALSE}
+library(RColorBrewer)  
+months <- c("Jan","Feb","Mar","Apr","May")  
+regions <- c("West","North","South")  
+# Creating the matrix of the values.  
+Values <- matrix(c(21,32,33,14,95,46,67,78,39,11,22,23,94,15,16), nrow = 3, ncol = 5, byrow = TRUE)  
+# Giving the chart file a name  
+# png(file = "stacked_chart.png")  
+# Creating the bar chart  
+barplot(Values, main = "Total Revenue", names.arg = months, xlab = "Month", ylab = "Revenue", col =c("cadetblue3","deeppink2","goldenrod1"))  
+# Adding the legend to the chart  
+legend("topleft", regions, cex = 1.3, fill = c("cadetblue3","deeppink2","goldenrod1"))  
+  
+# Saving the file  
+# dev.off()  
+```
+
+### boxplot(x, data, notch, varwidth, names, main)  
+S.No	Parameter	Description
+1.	x	It is a vector or a formula.
+2.	data	It is the data frame.
+3.	notch	It is a logical value set as true to draw a notch.
+4.	varwidth	It is also a logical value set as true to draw the width of the box same as the sample size.
+5.	names	It is the group of labels that will be printed under each boxplot.
+6.	main	It is used to give a title to the graph.
+
+```{r pressure, echo=FALSE}
+# Giving a name to the chart file.  
+#png(file = "boxplot.png")  
+# Plotting the chart.  
+boxplot(mpg ~ cyl, data = mtcars, xlab = "Quantity of Cylinders",  
+        ylab = "Miles Per Gallon", main = "R Boxplot Example")  
+  
+# Save the file.  
+#dev.off()  
+```
+### Boxplot using notch
+```{r pressure, echo=FALSE}
+# Giving a name to our chart.  
+# png(file = "boxplot_using_notch.png")  
+# Plotting the chart.  
+boxplot(mpg ~ cyl, data = mtcars,   
+        xlab = "Quantity of Cylinders",  
+        ylab = "Miles Per Gallon",   
+        main = "Boxplot Example",  
+        notch = TRUE,   
+        varwidth = TRUE,   
+        col = c("green","yellow","red"),  
+        names = c("High","Medium","Low")  
+)  
+# Saving the file.  
+# dev.off()  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```{r pressure, echo=FALSE}
 # Histogram for Maximum Daily Temperature 
 data(airquality) 
@@ -55,6 +156,28 @@ Maximum Temperature(Daily)",
 	xlim = c(50, 125), col ="yellow", 
 	freq = TRUE) 
 ```
+
+
+```{r pressure, echo=FALSE}
+
+barplot(iris$Petal.Length) #Creating simple Bar Graph
+barplot(iris$Sepal.Length,col  = brewer.pal(3,"Set1"))
+barplot(table(iris$Species,iris$Sepal.Length),col  = brewer.pal(3,"Set1")) #Stacked Plot
+```
+```{r pressure, echo=FALSE}
+library(RColorBrewer)
+data(VADeaths)
+par(mfrow=c(2,3))
+hist(VADeaths,breaks=10, col=brewer.pal(3,"Set3"),main="Set3 3 colors")
+hist(VADeaths,breaks=3 ,col=brewer.pal(3,"Set2"),main="Set2 3 colors")
+hist(VADeaths,breaks=7, col=brewer.pal(3,"Set1"),main="Set1 3 colors")
+hist(VADeaths,,breaks= 2, col=brewer.pal(8,"Set3"),main="Set3 8 colors")
+hist(VADeaths,col=brewer.pal(8,"Greys"),main="Greys 8 colors")
+hist(VADeaths,col=brewer.pal(8,"Greens"),main="Greens 8 colors")
+```
+
+
+
 ```{r pressure, echo=FALSE}
 # Box plot for average wind speed 
 data(airquality) 
@@ -73,6 +196,19 @@ boxplot(airquality[, 0:4],
 		main ='Box Plots for Air Quality Parameters') 
 
 ```
+
+```{r pressure, echo=FALSE}
+boxplot(iris$Petal.Length~iris$Species) #Creating Box Plot between two variable
+```
+```{r pressure, echo=FALSE}
+data(iris)
+par(mfrow=c(2,2))
+boxplot(iris$Sepal.Length,col="red")
+boxplot(iris$Sepal.Length~iris$Species,col="red")
+boxplot(iris$Sepal.Length~iris$Species,col=heat.colors(3))
+boxplot(iris$Sepal.Length~iris$Species,col=topo.colors(3))
+```
+
 ```{r pressure, echo=FALSE}
 # Scatter plot for Ozone Concentration per month 
 data(airquality) 
@@ -124,6 +260,11 @@ v <- c(17, 25, 38, 13, 41)
 plot(v, type = "o")
 
 ```
+
+```{r pressure, echo=FALSE}
+plot(AirPassengers,type="l")  #Simple Line Plot
+```
+
 ```{r pressur, echo=FALSE}
 # Create the data for the chart.
 v <- c(17, 25, 38, 13, 41)
@@ -231,6 +372,147 @@ plot(x, y, cex = 1, pch = 3,
 legend("topleft", regions, cex = 0.7, fill = colors)
 
 ```
+
+```{r pressure, echo=FALSE}
+plot(iris,col=brewer.pal(3,"Set1"))
+```
+
+```{r pressure, echo=FALSE}
+pie(table(iris$Species))
+```
+
+```{console}
+pie(X, Labels, Radius, Main, Col, Clockwise)  
+X is a vector that contains the numeric values used in the pie chart.
+Labels are used to give the description to the slices.
+Radius describes the radius of the pie chart.
+Main describes the title of the chart.
+Col defines the color palette.
+Clockwise is a logical value that indicates the clockwise or anti-clockwise direction in which slices are drawn.
+```
+
+```{r pressure, echo=FALSE}
+# Creating data for the graph.  
+x <- c(20, 65, 15, 50)  
+labels <- c("India", "America", "Shri Lanka", "Nepal")  
+# Giving the chart file a name.  
+png(file = "Country.jpg")  
+# Plotting the chart.  
+pie(x,labels)  
+# Saving the file.  
+dev.off() 
+```
+```{r pressure, echo=FALSE}
+# Creating data for the graph.  
+x <- c(20, 65, 15, 50)  
+labels <- c("India", "America", "Shri Lanka", "Nepal")  
+# Giving the chart file a name.  
+png(file = "title_color.jpg")  
+# Plotting the chart.  
+pie(x,labels,main="Country Pie chart",col=rainbow(length(x)))  
+# Saving the file.  
+dev.off()  
+```
+```{r pressure, echo=FALSE}
+# Creating data for the graph.  
+x <- c(20, 65, 15, 50)  
+labels <- c("India", "America", "Shri Lanka", "Nepal")  
+pie_percent<- round(100*x/sum(x), 1)  
+# Giving the chart file a name.  
+png(file = "per_pie.jpg")  
+# Plotting the chart.  
+pie(x, labels = pie_percent, main = "Country Pie Chart",col = rainbow(length(x)))  
+legend("topright", c("India", "America", "Shri Lanka", "Nepal"), cex = 0.8,  
+fill = rainbow(length(x)))  
+#Saving the file.  
+dev.off()  
+```
+```{r pressure, echo=FALSE}
+# Getting the library. 
+install.packages("plotrix")
+library(plotrix)  
+# Creating data for the graph.  
+x <- c(20, 65, 15, 50,45)  
+labels <- c("India", "America", "Shri Lanka", "Nepal","Bhutan")  
+# Give the chart file a name.  
+png(file = "3d_pie_chart1.jpg")  
+# Plot the chart.  
+pie3D(x,labelslabels = labels,explode = 0.1, main = "Country Pie Chart")  
+# Save the file.  
+dev.off()  
+```
+```{r pressure, echo=FALSE}
+# Getting the library.  
+library(plotrix)  
+# Creating data for the graph.  
+x <- c(20, 65, 15, 50,45)  
+labels <- c("India", "America", "Shri Lanka", "Nepal","Bhutan")  
+pie_percent<- round(100*x/sum(x), 1)  
+# Giving the chart file a name.  
+png(file = "three_D_pie.jpg")  
+# Plotting the chart.  
+pie3D(x, labels = pie_percent, main = "Country Pie Chart",col = rainbow(length(x)))  
+legend("topright", c("India", "America", "Shri Lanka", "Nepal","Bhutan"), cex = 0.8,  
+fill = rainbow(length(x)))  
+#Saving the file.  
+dev.off()  
+```
+
+
+
+
+
+```{r pressure, echo=FALSE}
+install.packages("hexbin")
+library(hexbin)
+a=hexbin(diamonds$price,diamonds$carat,xbins=40)
+library(RColorBrewer)
+plot(a)
+```
+
+```{r pressure, echo=FALSE}
+install.packages("RColorBrewer")
+library(RColorBrewer)
+rf <- colorRampPalette(rev(brewer.pal(40,'Set3')))
+hexbinplot(diamonds$price~diamonds$carat, data=diamonds, colramp=rf)
+```
+
+```{r pressure, echo=FALSE}
+data(HairEyeColor)
+mosaicplot(HairEyeColor)
+```
+
+```{r pressure, echo=FALSE}
+heatmap(as.matrix(mtcars))
+```
+```{r pressure, echo=FALSE}
+image(as.matrix(b[2:7]))
+
+```
+
+```{r pressure, echo=FALSE}
+install.packages("magrittr")
+library(magrittr)
+install.packages("leaflet")
+library(leaflet)
+m <- leaflet() %>%
+addTiles() %>%  # Add default OpenStreetMap map tiles
+addMarkers(lng=77.2310, lat=28.6560, popup="The delicious food of chandni chowk")
+m  # Print the map
+```
+```{r pressure, echo=FALSE}
+install.packages("Rcmdr")
+data(iris, package="datasets")
+scatter3d(Petal.Width~Petal.Length+Sepal.Length|Species, data=iris, fit="linear"
+residuals=TRUE, parallel=FALSE, bg="black", axis.scales=TRUE, grid=TRUE, ellipsoid=FALSE)
+```
+```{r pressure, echo=FALSE}
+>data(iris, package="datasets")
+>scatter3d(Petal.Width~Petal.Length+Sepal.Length|Species, data=iris, fit="linear"
+>residuals=TRUE, parallel=FALSE, bg="black", axis.scales=TRUE, grid=TRUE, ellipsoid=FALSE)
+```
+
+
 ![ggplot](https://media.geeksforgeeks.org/wp-content/uploads/20211207130952/NikhilImageedit1.jpg)
 ```{r pressure, echo=FALSE}
 # Print the top 5 records of the dataset
@@ -433,6 +715,8 @@ ggplot2 looks for the mapped variables in the data argument, in this case, `mpg.
 ggplot(data = <DATA>) + 
   <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
 ```
+
+
 
 
 

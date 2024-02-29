@@ -1,0 +1,147 @@
+---
+title: "my_sql_in_r"
+author: "Dr. Naveen Kumar"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# Installing RMySQL package in R
+```{r pressure, echo=FALSE}
+install.packages("RMySQL")
+```
+
+```{r pressure, echo=FALSE}
+install.packages("DBI")
+```
+
+```{r pressure, echo=FALSE}
+library(DBI)
+```
+
+# Load RMySQL library
+```{r pressure, echo=FALSE}
+library(RMySQL)
+```
+
+
+
+
+```{r pressure, echo=FALSE}
+
+# Create connection
+mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
+					dbname = 'hospital', host = 'localhost')
+
+# Show tables in database
+dbListTables(mysqlconn)
+
+```
+
+# Creating table in MySQL
+```{r pressure, echo=FALSE}
+# Create connection
+mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
+					dbname = 'hospital', host = 'localhost')
+
+# Create new table mtcars
+dbWriteTable(mysqlconn, "mtcars", 
+			mtcars[1:10, ],
+			overwrite = TRUE)
+```
+
+# Check infile ON/OFF in MySQL
+```
+You may check the local_infile is disabled or enable. So, you try this-
+
+mysql> show global variables like 'local_infile';
+if it shows-
+
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| local_infile  |  OFF  |
++---------------+-------+
+(this means local_infile is disable)
+then enable with this-
+
+mysql> set global local_infile=true;
+Then check again and quit from mysql server with this-
+
+mysql> exit
+```
+
+# Drop Tables in MySQL Using R
+```{r pressure, echo=FALSE}
+# Create connection
+mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
+					dbname = 'hospital', host = 'localhost')
+
+
+# Drop table mtcars from database
+dbSendQuery(mysqlconn, 'DROP TABLE mtcars')
+
+```
+
+# Insert into Table in MySQL Using R
+```{r pressure, echo=FALSE}
+# Create connection
+mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
+					dbname = 'hospital', host = 'localhost')
+
+# Inserting into students table
+dbSendQuery(mysqlconn, "insert into students(id, name, age, marks, gender) 
+values(928, 'Lakhan', 22, 78.4, 'male')"
+)
+```
+# Updating a Table in MySQL Using R
+```{r pressure, echo=FALSE}
+# Create connection
+mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
+					dbname = 'hospital', host = 'localhost')
+
+# Update query
+dbSendQuery(mysqlconn, "UPDATE students SET name = 'Lakhan Saxena'
+where id = 928")
+
+```
+# Querying a Table in MySQL Using R
+```{r pressure, echo=FALSE}
+# Create connection
+mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
+					dbname = 'hospital', host = 'localhost')
+
+# Select all rows from articles table
+res = dbSendQuery(mysqlconn, "SELECT *FROM students")
+
+# Fetch first 3 rows in data frame
+df = fetch(res, n = 3)
+print(df)
+
+```
+
+
+
+

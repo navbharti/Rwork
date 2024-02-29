@@ -1,0 +1,156 @@
+---
+title: "linear_regression"
+author: "Dr. Naveen Kumar"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+# Linear Regression
+Used to predict the value of an outcome variable y on the basis of one or more input predictor variables x. 
+
+Used to establish a linear relationship between the predictor and response variables.
+
+predictor and response variables are related through an equation in which the exponent of both these variables is 1. 
+
+Mathematically, a linear relationship denotes a straight line, when plotted as a graph.
+
+
+```
+y = ax + b  
+```
+
+Here,
+
+y is a response variable.
+x is a predictor variable.
+a and b are constants that are called the coefficients.
+
+## Steps for establishing the Regression
+The prediction of the weight of a person when his height is known, is a simple example of regression. 
+
+To predict the weight, we need to have a relationship between the height and weight of a person.
+
+### There are the following steps to create the relationship:
+
+1. Experiment of gathering a sample of observed values of height and weight.
+2. Create a relationship model using the `lm()` function of R.
+3. Find the `coefficient` with the help of the model and create the mathematical equation using this coefficient.
+4. Get the summary of the relationship model to understand the `average error` in prediction, known as `residuals.`
+5. Use the `predict()` function to predict the weight of the new person.
+
+### There is the following syntax of lm() function:
+
+```
+lm(formula,data)
+```
+
+Here,
+
+S.No	Parameters	Description
+1.	Formula	It is a symbol that presents the relationship between x and y.
+2.	Data	It is a vector on which we will apply the formula.
+Creating Relationship Model and Getting the Coefficients
+Let's start performing the second and third steps, i.e., creating a relationship model and getting the coefficients. We will use the lm() function and pass the x and y input vectors and store the result in a variable named relationship_model.
+
+### Creating Relationship Model and Getting the Coefficients
+use the lm() function and pass the x and y input vectors and store the result in a variable named relationship_model.
+
+```{r pression,echo=FALSE}
+#Creating input vector for lm() function  
+x <- c(141, 134, 178, 156, 108, 116, 119, 143, 162, 130)  
+y <- c(62, 85, 56, 21, 47, 17, 76, 92, 62, 58)  
+# Applying the lm() function.  
+relationship_model<- lm(y~x)  
+#Printing the coefficient   
+print(relationship_model)  
+```
+
+### Getting Summary of Relationship Model
+Use the `summary()` function to get a summary of the relationship model. 
+
+```{r pressure, echo=FALSE}
+#Creating input vector for lm() function  
+x <- c(141, 134, 178, 156, 108, 116, 119, 143, 162, 130)  
+y <- c(62, 85, 56, 21, 47, 17, 76, 92, 62, 58)  
+  
+# Applying the lm() function.  
+relationship_model<- lm(y~x)  
+  
+#Printing the coefficient   
+print(summary(relationship_model))  
+```
+### The predict() Function
+predict the weight of new persons with the help of the `predict()` function. 
+syntax:
+predict(object, newdata)  
+
+```{r pressure, echo=FALSE}
+#Creating input vector for lm() function  
+x <- c(141, 134, 178, 156, 108, 116, 119, 143, 162, 130)  
+y <- c(62, 85, 56, 21, 47, 17, 76, 92, 62, 58)  
+  
+# Applying the lm() function.  
+relationship_model<- lm(y~x)  
+  
+# Finding the weight of a person with height 170.  
+z <- data.frame(x = 160)  
+predict_result<-  predict(relationship_model,z)  
+print(predict_result)  
+```
+
+### Plotting Regression
+plot out prediction results with the help of the `plot()` function. This function takes parameter x and y as an input vector and many more arguments.
+
+```{r pressure, echo=FALSE}
+#Creating input vector for lm() function  
+x <- c(141, 134, 178, 156, 108, 116, 119, 143, 162, 130)  
+y <- c(62, 85, 56, 21, 47, 17, 76, 92, 62, 58)  
+relationship_model<- lm(y~x)  
+# Giving a name to the chart file.  
+png(file = "linear_regression.png")  
+# Plotting the chart.  
+plot(y,x,col = "red",main = "Height and Weight Regression",abline(lm(x~y)),cex = 1.3,pch = 16,xlab = "Weight in Kg",ylab = "Height in cm")  
+# Saving the file.  
+dev.off()  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
