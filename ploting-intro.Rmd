@@ -2,7 +2,9 @@
 title: "basic-plots"
 author: "Dr. Naveen Kumar"
 date: "`r Sys.Date()`"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -23,7 +25,7 @@ summary(cars)
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r}
 plot(pressure)
 ```
 
@@ -31,7 +33,7 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 
 
-```{r pressure, echo=FALSE}
+```{r}
 # Horizontal Bar Plot for 
 # Ozone concentration in air 
 barplot(airquality$Ozone, 
@@ -46,13 +48,13 @@ S.No	Parameter	Description
 5.	names.arg	A vector of names that appear under each bar.
 6.	col	It is used to give colors to the bars in the graph.
 
-```{r pressure, echo=FALSE}
+```{r}
 # Vertical Bar Plot for 
 # Ozone concentration in air 
 barplot(airquality$Ozone, main = 'Ozone Concenteration in air', 
 		xlab = 'ozone levels', col ='blue', horiz = FALSE) 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Creating the data for Bar chart  
 H<- c(12,35,54,3,41)  
 # Giving the chart file a name  
@@ -63,7 +65,7 @@ barplot(H)
 #dev.off()  
 ```
 ### Labels, Title & Colors
-```{r pressure, echo=FALSE}
+```{r}
 # Creating the data for Bar chart  
 H <- c(12,35,54,3,41)  
 M<- c("Feb","Mar","Apr","May","Jun")  
@@ -78,21 +80,21 @@ barplot(H,names.arg=M,xlab="Month",ylab="Revenue",col="Green",
 #dev.off()  
 ```
 ### Group Bar Chart & Stacked Bar Chart
-```{r pressure,echo=FALSE}
+```{r}
 library(RColorBrewer)  
 months <- c("Jan","Feb","Mar","Apr","May")  
 regions <- c("West","North","South")  
 # Creating the matrix of the values.  
 Values <- matrix(c(21,32,33,14,95,46,67,78,39,11,22,23,94,15,16), nrow = 3, ncol = 5, byrow = TRUE)  
 # Giving the chart file a name  
-# png(file = "stacked_chart.png")  
+png(file = "bca_4_b.png")  
 # Creating the bar chart  
 barplot(Values, main = "Total Revenue", names.arg = months, xlab = "Month", ylab = "Revenue", col =c("cadetblue3","deeppink2","goldenrod1"))  
 # Adding the legend to the chart  
 legend("topleft", regions, cex = 1.3, fill = c("cadetblue3","deeppink2","goldenrod1"))  
   
 # Saving the file  
-# dev.off()  
+dev.off()  
 ```
 
 ### boxplot(x, data, notch, varwidth, names, main)  
@@ -104,7 +106,7 @@ S.No	Parameter	Description
 5.	names	It is the group of labels that will be printed under each boxplot.
 6.	main	It is used to give a title to the graph.
 
-```{r pressure, echo=FALSE}
+```{r}
 # Giving a name to the chart file.  
 #png(file = "boxplot.png")  
 # Plotting the chart.  
@@ -115,7 +117,7 @@ boxplot(mpg ~ cyl, data = mtcars, xlab = "Quantity of Cylinders",
 #dev.off()  
 ```
 ### Boxplot using notch
-```{r pressure, echo=FALSE}
+```{r}
 # Giving a name to our chart.  
 # png(file = "boxplot_using_notch.png")  
 # Plotting the chart.  
@@ -146,7 +148,7 @@ boxplot(mpg ~ cyl, data = mtcars,
 
 
 
-```{r pressure, echo=FALSE}
+```{r}
 # Histogram for Maximum Daily Temperature 
 data(airquality) 
 
@@ -158,13 +160,13 @@ Maximum Temperature(Daily)",
 ```
 
 
-```{r pressure, echo=FALSE}
+```{r}
 
 barplot(iris$Petal.Length) #Creating simple Bar Graph
 barplot(iris$Sepal.Length,col  = brewer.pal(3,"Set1"))
 barplot(table(iris$Species,iris$Sepal.Length),col  = brewer.pal(3,"Set1")) #Stacked Plot
 ```
-```{r pressure, echo=FALSE}
+```{r}
 library(RColorBrewer)
 data(VADeaths)
 par(mfrow=c(2,3))
@@ -178,7 +180,7 @@ hist(VADeaths,col=brewer.pal(8,"Greens"),main="Greens 8 colors")
 
 
 
-```{r pressure, echo=FALSE}
+```{r}
 # Box plot for average wind speed 
 data(airquality) 
 
@@ -189,7 +191,7 @@ at La Guardia Airport",
 		horizontal = TRUE, notch = TRUE) 
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Multiple Box plots, each representing 
 # an Air Quality Parameter 
 boxplot(airquality[, 0:4], 
@@ -197,10 +199,10 @@ boxplot(airquality[, 0:4],
 
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 boxplot(iris$Petal.Length~iris$Species) #Creating Box Plot between two variable
 ```
-```{r pressure, echo=FALSE}
+```{r}
 data(iris)
 par(mfrow=c(2,2))
 boxplot(iris$Sepal.Length,col="red")
@@ -209,7 +211,7 @@ boxplot(iris$Sepal.Length~iris$Species,col=heat.colors(3))
 boxplot(iris$Sepal.Length~iris$Species,col=topo.colors(3))
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 # Scatter plot for Ozone Concentration per month 
 data(airquality) 
 
@@ -219,7 +221,7 @@ plot(airquality$Ozone, airquality$Month,
 	ylab =" Month of observation ", pch = 19) 
 
 ```
-```{r pressur, echo=FALSE}
+```{r}
 # Set seed for reproducibility 
 # set.seed(110) 
 
@@ -234,14 +236,14 @@ rownames(data) <- paste0("row", 1:5)
 heatmap(data)		 
 
 ```
-```{r pressure, echo=FALSE}
-install.packages("maps")
+```{r}
+install.packages("maps", repos = "http://cran.us.r-project.org")
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Read dataset and convert it into 
 # Dataframe 
 #data <- read.csv("worldcities.csv") 
-data <- read.csv(file.choose()) 
+data <- read.csv(file = "data/data.csv") 
 df <- data.frame(data) 
 
 # Load the required libraries 
@@ -252,7 +254,7 @@ map(database = "world")
 points(x = df$Lat[1:500], y = df$Lon[1:500], col = "Red") 
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Create the data for the chart.
 v <- c(17, 25, 38, 13, 41)
 
@@ -261,11 +263,11 @@ plot(v, type = "o")
 
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 plot(AirPassengers,type="l")  #Simple Line Plot
 ```
 
-```{r pressur, echo=FALSE}
+```{r}
 # Create the data for the chart.
 v <- c(17, 25, 38, 13, 41)
 
@@ -275,7 +277,7 @@ plot(v, type = "o", col = "green",
 	main = "Article Written chart")
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Create the data for the chart.
 v <- c(17, 25, 38, 13, 41)
 t <- c(22, 19, 36, 19, 23)
@@ -288,7 +290,7 @@ lines(t, type = "o", col = "blue")
 lines(m, type = "o", col = "green")
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Create the data for the chart
 A <- c(17, 32, 8, 53, 1)
 
@@ -296,7 +298,7 @@ A <- c(17, 32, 8, 53, 1)
 barplot(A, xlab = "X-axis", ylab = "Y-axis", main ="Bar-Chart")
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Create the data for the chart
 A <- c(17, 32, 8, 53, 1)
 
@@ -306,7 +308,7 @@ barplot(A, horiz = TRUE, xlab = "X-axis",
 	)
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Create the data for the chart
 A <- c(17, 2, 8, 13, 1, 22)
 B <- c("Jan", "feb", "Mar", "Apr", "May", "Jun")
@@ -317,7 +319,7 @@ barplot(A, names.arg = B, xlab ="Month",
 		main ="GeeksforGeeks-Article chart")
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Create the data for the chart
 A <- c(17, 2, 8, 13, 1, 22)
 B <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun")
@@ -335,7 +337,7 @@ y = A + 1, labels = A, pos = 3, cex = 1.2, col = "black"
 )
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 colors = c("green", "orange", "brown")
 months <- c("Mar", "Apr", "May", "Jun", "Jul")
 regions <- c("East", "West", "North")
@@ -353,19 +355,19 @@ barplot(Values, main = "Total Revenue", names.arg = months,
 legend("topleft", regions, cex = 0.7, fill = colors)
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 colors = c("green", "orange", "brown")
 months <- c("Mar", "Apr", "May", "Jun", "Jul")
 regions <- c("East", "West", "North")
 
 # Create the matrix of the values.
-Values <- matrix(c(2, 9, 3, 11, 9, 4, 8, 7, 3, 12, 5, 2, 8, 10, 11),
-				nrow = 3, ncol = 5, byrow = TRUE)
+Values <- matrix(c(2, 9, 3, 11, 9, 4, 8, 7, 3, 12, 5, 2, 8, 10, 11),nrow = 3, ncol = 5, byrow = TRUE)
 
 # Create the bar chart
 barplot(Values, main = "Total Revenue", names.arg = months,
 		xlab = "Month", ylab = "Revenue", col = colors)
-plot(x, y, cex = 1, pch = 3,
+
+plot(iris$Sepal.Length, iris$Sepal.Width, cex = 1, pch = 3,
      xlab ="x", ylab ="y",
      col ="black")
 # Add the legend to the chart
@@ -373,15 +375,14 @@ legend("topleft", regions, cex = 0.7, fill = colors)
 
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 plot(iris,col=brewer.pal(3,"Set1"))
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 pie(table(iris$Species))
 ```
 
-```{console}
 pie(X, Labels, Radius, Main, Col, Clockwise)  
 X is a vector that contains the numeric values used in the pie chart.
 Labels are used to give the description to the slices.
@@ -389,9 +390,9 @@ Radius describes the radius of the pie chart.
 Main describes the title of the chart.
 Col defines the color palette.
 Clockwise is a logical value that indicates the clockwise or anti-clockwise direction in which slices are drawn.
-```
 
-```{r pressure, echo=FALSE}
+
+```{r}
 # Creating data for the graph.  
 x <- c(20, 65, 15, 50)  
 labels <- c("India", "America", "Shri Lanka", "Nepal")  
@@ -402,7 +403,7 @@ pie(x,labels)
 # Saving the file.  
 dev.off() 
 ```
-```{r pressure, echo=FALSE}
+```{r }
 # Creating data for the graph.  
 x <- c(20, 65, 15, 50)  
 labels <- c("India", "America", "Shri Lanka", "Nepal")  
@@ -413,7 +414,7 @@ pie(x,labels,main="Country Pie chart",col=rainbow(length(x)))
 # Saving the file.  
 dev.off()  
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Creating data for the graph.  
 x <- c(20, 65, 15, 50)  
 labels <- c("India", "America", "Shri Lanka", "Nepal")  
@@ -427,9 +428,9 @@ fill = rainbow(length(x)))
 #Saving the file.  
 dev.off()  
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Getting the library. 
-install.packages("plotrix")
+install.packages("plotrix", repos = "http://cran.us.r-project.org")
 library(plotrix)  
 # Creating data for the graph.  
 x <- c(20, 65, 15, 50,45)  
@@ -441,7 +442,7 @@ pie3D(x,labelslabels = labels,explode = 0.1, main = "Country Pie Chart")
 # Save the file.  
 dev.off()  
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Getting the library.  
 library(plotrix)  
 # Creating data for the graph.  
@@ -462,65 +463,56 @@ dev.off()
 
 
 
-```{r pressure, echo=FALSE}
-install.packages("hexbin")
+```{r}
+install.packages("hexbin", repos ="http://cran.us.r-project.org")
 library(hexbin)
-a=hexbin(diamonds$price,diamonds$carat,xbins=40)
+library(ggplot2)
+data("diamonds")
+a<-hexbin(diamonds$price,diamonds$carat,xbins=40)
 library(RColorBrewer)
 plot(a)
 ```
 
-```{r pressure, echo=FALSE}
-install.packages("RColorBrewer")
+```{r}
+install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
 library(RColorBrewer)
+library(ggplot2)
 rf <- colorRampPalette(rev(brewer.pal(40,'Set3')))
+data(diamonds)
 hexbinplot(diamonds$price~diamonds$carat, data=diamonds, colramp=rf)
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 data(HairEyeColor)
 mosaicplot(HairEyeColor)
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 heatmap(as.matrix(mtcars))
 ```
-```{r pressure, echo=FALSE}
-image(as.matrix(b[2:7]))
-
 ```
 
-```{r pressure, echo=FALSE}
-install.packages("magrittr")
+```{r}
+install.packages("magrittr", repos = "http://cran.us.r-project.org")
 library(magrittr)
-install.packages("leaflet")
+install.packages("leaflet", repos = "http://cran.us.r-project.org")
 library(leaflet)
 m <- leaflet() %>%
 addTiles() %>%  # Add default OpenStreetMap map tiles
 addMarkers(lng=77.2310, lat=28.6560, popup="The delicious food of chandni chowk")
 m  # Print the map
 ```
-```{r pressure, echo=FALSE}
-install.packages("Rcmdr")
-data(iris, package="datasets")
-scatter3d(Petal.Width~Petal.Length+Sepal.Length|Species, data=iris, fit="linear"
-residuals=TRUE, parallel=FALSE, bg="black", axis.scales=TRUE, grid=TRUE, ellipsoid=FALSE)
-```
-```{r pressure, echo=FALSE}
->data(iris, package="datasets")
->scatter3d(Petal.Width~Petal.Length+Sepal.Length|Species, data=iris, fit="linear"
->residuals=TRUE, parallel=FALSE, bg="black", axis.scales=TRUE, grid=TRUE, ellipsoid=FALSE)
-```
+
 
 
 ![ggplot](https://media.geeksforgeeks.org/wp-content/uploads/20211207130952/NikhilImageedit1.jpg)
-```{r pressure, echo=FALSE}
+```{r}
 # Print the top 5 records of the dataset
 head(mtcars)
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Installing the package
-install.packages("dplyr")
+install.packages("dplyr", repos = "http://cran.us.r-project.org")
 
 # Loading package
 library(dplyr)
@@ -529,20 +521,22 @@ library(dplyr)
 summary(mtcars)
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
+install.packages("ggplot2", repos = "http://cran.us.r-project.org")
 library(ggplot2)
-library(dplyr)
+#library(dplyr)
 
 ggplot(data = mtcars) +
-labs(title = "MTCars Data Plot")
+labs(title = "MTCars Data Plot",
+     y="This is y axis", x="this is x-axis")
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Aesthetic Layer
 ggplot(data = mtcars, aes(x = hp, y = mpg, col = disp))+
 labs(title = "MTCars Data Plot")
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Geometric layer
 ggplot(data = mtcars, aes(x = hp, y = mpg, col = disp)) +
 geom_point() +
@@ -551,21 +545,37 @@ labs(title = "Miles per Gallon vs Horsepower",
 	y = "Miles per Gallon")
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Adding size
 ggplot(data = mtcars, aes(x = hp, y = mpg, size = disp)) +
 geom_point() +
 labs(title = "Miles per Gallon vs Horsepower",
 	x = "Horsepower",
 	y = "Miles per Gallon")
+```
+```{r}
+# Adding size
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, col = Species)) +
+geom_point() +
+labs(title = "Iris Flower Sepal Lenght vs Sepal Width",
+	x = "Sepal Length",
+	y = "Sepal Width")
+```
 
+```{r}
+cor(iris$Sepal.Length, iris$Sepal.Width)
+```
+
+```{r}
 # Adding shape and color
 ggplot(data = mtcars, aes(x = hp, y = mpg, col = factor(cyl),
 	shape = factor(am))) +geom_point() +
 labs(title = "Miles per Gallon vs Horsepower",
 	x = "Horsepower",
 	y = "Miles per Gallon")
+```
 
+```{r}
 # Histogram plot
 ggplot(data = mtcars, aes(x = hp)) +
 geom_histogram(binwidth = 5) +
@@ -574,10 +584,22 @@ labs(title = "Histogram of Horsepower",
 	y = "Count")
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
+# Histogram plot
+ggplot(data = iris, aes(x = Sepal.Length)) +
+geom_histogram() +
+labs(title = "Iris Flower Sepal Length",
+	x = "Sepal Length",
+	y = "Measure")
+```
+
+
+```{r}
 # Facet Layer
 # Separate rows according to transmission type
 p <- ggplot(data = mtcars, aes(x = hp, y = mpg, shape = factor(cyl))) + geom_point()
+
+p
 
 p + facet_grid(am ~ .) +
 labs(title = "Miles per Gallon vs Horsepower",
@@ -593,46 +615,46 @@ labs(title = "Miles per Gallon vs Horsepower",
 	y = "Miles per Gallon")
 
 ```
-```{r pressure, echo=FALSE}
+```{r}
 ggplot(data = mtcars, aes(x = hp, y = mpg)) +
 geom_point() +
 stat_smooth(method = lm, col = "red") +
 labs(title = "Miles per Gallon vs Horsepower")
 ```
-```{r pressure, echo=FALSE}
+```{r}
 ggplot(data = mtcars, aes(x = wt, y = mpg)) +
 geom_point() +
 stat_smooth(method = lm, col = "red") +
-scale_y_continuous("Miles per Gallon", limits = c(2, 35), expand = c(0, 0)) +
-scale_x_continuous("Weight", limits = c(0, 25), expand = c(0, 0)) +
+scale_y_continuous("Miles per Gallon", limits = c(6, 35), expand = c(0, 0)) +
+scale_x_continuous("Weight", limits = c(0, 8), expand = c(0, 0)) +
 coord_equal() +
 labs(title = "Miles per Gallon vs Weight",
 	x = "Weight",
 	y = "Miles per Gallon")
 ```
 
-```{r pressure, echo=FALSE}
+```{r}
 # Add coord_cartesian() to proper zoom in
 ggplot(data = mtcars, aes(x = wt, y = hp, col = am)) +
 						geom_point() + geom_smooth() +
 						coord_cartesian(xlim = c(3, 6))
 ```
-```{r pressure, echo=FALSE}
+```{r}
 ggplot(data = mtcars, aes(x = hp, y = mpg)) +
 geom_point() +
 facet_grid(. ~ cyl) +
 theme(plot.background = element_rect(fill = "blue", colour = "gray")) +
 labs(title = "Miles per Gallon vs Horsepower")
 ```
-```{r pressure, echo=FALSE}
+```{r}
 ggplot(data = mtcars, aes(x = hp, y = mpg)) +
 		geom_point() + facet_grid(am ~ cyl) + 
 		theme_gray()+
 labs(title = "Miles per Gallon vs Horsepower")
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Install and load required packages
-install.packages("ggplot2")
+install.packages("ggplot2", repos = "http://cran.us.r-project.org")
 library(ggplot2)
 
 # Create a 2D density contour plot for the mtcars dataset
@@ -645,9 +667,9 @@ labs(title = "2D Density Contour Plot of mtcars Dataset",
 	fill = "Density") +
 theme_minimal()
 ```
-```{r pressure, echo=FALSE}
+```{r}
 library(ggplot2)
-install.packages("gridExtra")
+install.packages("gridExtra", repos = "http://cran.us.r-project.org")
 library(gridExtra)
 
 # Selecting specific columns from mtcars dataset
@@ -675,7 +697,7 @@ labs(title = "Histogram: Drat", x = "Drat", y = "Frequency")
 grid.arrange(hist_plot_mpg, hist_plot_disp, hist_plot_hp, hist_plot_drat,
 			ncol = 2)
 ```
-```{r pressure, echo=FALSE}
+```{r}
 # Create a plot
 plot <- ggplot(data = mtcars, aes(x = hp, y = mpg)) +
 geom_point() +
@@ -692,8 +714,8 @@ extracted_plot <- plot
 plot
 ```
 
-```{r pressure, echo=FALSE}
-install.packages("tidyverse")
+```{r}
+install.packages("tidyverse", repos = "http://cran.us.r-project.org")
 library(tidyverse)
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy))
@@ -711,10 +733,9 @@ The mapping argument is always paired with aes(), and the x and y arguments of a
 ggplot2 looks for the mapped variables in the data argument, in this case, `mpg.`
 
 ## ggplot template
-```
+
 ggplot(data = <DATA>) + 
   <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
-```
 
 
 

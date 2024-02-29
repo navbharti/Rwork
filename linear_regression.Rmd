@@ -8,6 +8,9 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r}
+plot(1, 5)
+```
 
 ## R Markdown
 
@@ -17,13 +20,19 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 summary(cars)
+cars
 ```
+
+```{r }
+summary(iris)
+```
+
 
 ## Including Plots
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r }
 plot(pressure)
 ```
 
@@ -41,15 +50,14 @@ predictor and response variables are related through an equation in which the ex
 Mathematically, a linear relationship denotes a straight line, when plotted as a graph.
 
 
-```
-y = ax + b  
-```
+### ***y = ax + b*** 
+
 
 Here,
 
-y is a response variable.
-x is a predictor variable.
-a and b are constants that are called the coefficients.
+* y is a response variable.
+* x is a predictor variable.
+* a and b are constants that are called the coefficients.
 
 ## Steps for establishing the Regression
 The prediction of the weight of a person when his height is known, is a simple example of regression. 
@@ -66,9 +74,9 @@ To predict the weight, we need to have a relationship between the height and wei
 
 ### There is the following syntax of lm() function:
 
-```
-lm(formula,data)
-```
+
+#### *** lm(formula,data) ***
+
 
 Here,
 
@@ -81,7 +89,7 @@ Let's start performing the second and third steps, i.e., creating a relationship
 ### Creating Relationship Model and Getting the Coefficients
 use the lm() function and pass the x and y input vectors and store the result in a variable named relationship_model.
 
-```{r pression,echo=FALSE}
+```{r }
 #Creating input vector for lm() function  
 x <- c(141, 134, 178, 156, 108, 116, 119, 143, 162, 130)  
 y <- c(62, 85, 56, 21, 47, 17, 76, 92, 62, 58)  
@@ -94,7 +102,7 @@ print(relationship_model)
 ### Getting Summary of Relationship Model
 Use the `summary()` function to get a summary of the relationship model. 
 
-```{r pressure, echo=FALSE}
+```{r}
 #Creating input vector for lm() function  
 x <- c(141, 134, 178, 156, 108, 116, 119, 143, 162, 130)  
 y <- c(62, 85, 56, 21, 47, 17, 76, 92, 62, 58)  
@@ -110,7 +118,7 @@ predict the weight of new persons with the help of the `predict()` function.
 syntax:
 predict(object, newdata)  
 
-```{r pressure, echo=FALSE}
+```{r}
 #Creating input vector for lm() function  
 x <- c(141, 134, 178, 156, 108, 116, 119, 143, 162, 130)  
 y <- c(62, 85, 56, 21, 47, 17, 76, 92, 62, 58)  
@@ -127,7 +135,7 @@ print(predict_result)
 ### Plotting Regression
 plot out prediction results with the help of the `plot()` function. This function takes parameter x and y as an input vector and many more arguments.
 
-```{r pressure, echo=FALSE}
+```{r }
 #Creating input vector for lm() function  
 x <- c(141, 134, 178, 156, 108, 116, 119, 143, 162, 130)  
 y <- c(62, 85, 56, 21, 47, 17, 76, 92, 62, 58)  
@@ -139,18 +147,3 @@ plot(y,x,col = "red",main = "Height and Weight Regression",abline(lm(x~y)),cex =
 # Saving the file.  
 dev.off()  
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,7 +2,10 @@
 title: "my_sql_in_r"
 author: "Dr. Naveen Kumar"
 date: "`r Sys.Date()`"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -23,33 +26,33 @@ summary(cars)
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r}
 plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 # Installing RMySQL package in R
-```{r pressure, echo=FALSE}
-install.packages("RMySQL")
+```{r }
+install.packages("RMySQL", repos = "http://cran.us.r-project.org")
 ```
 
-```{r pressure, echo=FALSE}
-install.packages("DBI")
+```{r }
+install.packages("DBI", repos = "http://cran.us.r-project.org")
 ```
 
-```{r pressure, echo=FALSE}
+```{r }
 library(DBI)
 ```
 
 # Load RMySQL library
-```{r pressure, echo=FALSE}
+```{r}
 library(RMySQL)
 ```
 
 
 
 
-```{r pressure, echo=FALSE}
+```{r}
 
 # Create connection
 mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
@@ -61,7 +64,7 @@ dbListTables(mysqlconn)
 ```
 
 # Creating table in MySQL
-```{r pressure, echo=FALSE}
+```{r}
 # Create connection
 mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
 					dbname = 'hospital', host = 'localhost')
@@ -73,7 +76,6 @@ dbWriteTable(mysqlconn, "mtcars",
 ```
 
 # Check infile ON/OFF in MySQL
-```
 You may check the local_infile is disabled or enable. So, you try this-
 
 mysql> show global variables like 'local_infile';
@@ -91,10 +93,9 @@ mysql> set global local_infile=true;
 Then check again and quit from mysql server with this-
 
 mysql> exit
-```
 
 # Drop Tables in MySQL Using R
-```{r pressure, echo=FALSE}
+```{r}
 # Create connection
 mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
 					dbname = 'hospital', host = 'localhost')
@@ -106,29 +107,29 @@ dbSendQuery(mysqlconn, 'DROP TABLE mtcars')
 ```
 
 # Insert into Table in MySQL Using R
-```{r pressure, echo=FALSE}
+```{r}
 # Create connection
 mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
 					dbname = 'hospital', host = 'localhost')
 
 # Inserting into students table
 dbSendQuery(mysqlconn, "insert into students(id, name, age, marks, gender) 
-values(928, 'Lakhan', 22, 78.4, 'male')"
+values(931, 'Lakhan', 22, 78.4, 'male')"
 )
 ```
 # Updating a Table in MySQL Using R
-```{r pressure, echo=FALSE}
+```{r}
 # Create connection
 mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
 					dbname = 'hospital', host = 'localhost')
 
 # Update query
-dbSendQuery(mysqlconn, "UPDATE students SET name = 'Lakhan Saxena'
+dbSendQuery(mysqlconn, "UPDATE students SET name = 'Mahalaxmi Saxena'
 where id = 928")
 
 ```
 # Querying a Table in MySQL Using R
-```{r pressure, echo=FALSE}
+```{r}
 # Create connection
 mysqlconn = dbConnect(MySQL(), user = 'root', password = 'navbharti',
 					dbname = 'hospital', host = 'localhost')
