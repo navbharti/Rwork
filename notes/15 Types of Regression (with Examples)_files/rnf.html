@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://ads.adthrive.com/builds/core/535dab7/html/rnf.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>AdThrive</title><script>(function(){function u(a){var b="function"===typeof Symbol&&Symbol.iterator,c=b&&a[b],d=0;if(c)return c.call(a);if(a&&"number"===typeof a.length)return {next:function(){a&&d>=a.length&&(a=void 0);return {value:a&&a[d++],done:!a}}};throw new TypeError(b?"Object is not iterable.":"Symbol.iterator is not defined.");}function h(a,b){var c="function"===typeof Symbol&&a[Symbol.iterator];if(!c)return a;a=c.call(a);var d,e=[];try{for(;(void 0===b||0<b--)&&!(d=a.next()).done;)e.push(d.value);}catch(k){var g=
+{error:k};}finally{try{d&&!d.done&&(c=a["return"])&&c.call(a);}finally{if(g)throw g.error;}}return e}function l(a,b,c){if(c||2===arguments.length)for(var d=0,e=b.length,g;d<e;d++)!g&&d in b||(g||(g=Array.prototype.slice.call(b,0,d)),g[d]=b[d]);return a.concat(g||Array.prototype.slice.call(b))}var f=function(){f=Object.assign||function(a){for(var b,c=1,d=arguments.length;c<d;c++){b=arguments[c];for(var e in b)Object.prototype.hasOwnProperty.call(b,e)&&(a[e]=b[e]);}return a};return f.apply(this,arguments)};
+"function"===typeof SuppressedError?SuppressedError:function(a,b,c){c=Error(c);return c.name="SuppressedError",c.error=a,c.suppressed=b,c};var n=function(a){var b;try{for(var c=u(document.cookie.split(";")),d=c.next();!d.done;d=c.next()){var e=h(d.value.split("=")),g=e[0],k=e.slice(1);if(g.trim()===a)return k.join("=").trim()}}catch(v){var m={error:v};}finally{try{d&&!d.done&&(b=c.return)&&b.call(c);}finally{if(m)throw m.error;}}return ""},p=function(a){return (a=n(a))&&JSON.parse(a)||[]},w=function(a,
+b){b=JSON.stringify(b);a=a+"="+b;b=new Date;b=b.setDate(b.getDate()+400);b=new Date(b);document.cookie="".concat(a,"; SameSite=None; Secure; path=/; expires=").concat(b.toUTCString());},x=function(a,b){return !!b.find(function(c){return c.rf_code===a.rf_code})},q=function(){var a=window.localStorage.getItem("mcmpfreqrec");return a&&JSON.parse(a)||[]},y=function(a){var b="string"===typeof a.partners?a.partners:a.partners.join(";");return [a.rf_code,b]},z=function(a){return f(f({},a),{counter:a.counter+
+1})},r=function(a){return Math.round((new Date(a.modified)-new Date(a.created))/864E5)>a.recency},t=function(a){var b=f,c=f({},a),d=a.counter>=a.frequency;a=!r(a);return b(c,{isMatched:d&&a})},A=function(a){return t(f(f({},a),{counter:1,isMatched:!1,created:(new Date).toISOString(),modified:(new Date).toISOString()}))},B=function(a){return function(b){return a.find(function(c){return c.rf_code===b.rf_code})?t(z(f(f({},b),{modified:(new Date).toISOString()}))):f({},b)}},C=function(a){var b=a.data.mcmpData,
+c=q();c=0!==c.length?c:p("mcmpfreqrec");var d=b.filter(function(e){return !x(e,c)}).map(A);b=c.map(B(b)).filter(function(e){return !r(e)});w("mcmpfreqrec",l(l([],h(b),!1),h(d),!1));c=q();c=0!==c.length?c:p("mcmpfreqrec");window.parent.postMessage({message:"mcmpDataResponse",mcmpData:c.filter(function(e){return e.isMatched}).map(y)},a.origin);},D=function(a){var b=document.referrer.split("/");(""===b[0]?"":"".concat(b[0],"//").concat(b[2]))===a.origin&&(b=a.data,"setMcmpData"===b.message?C(a):"deleteMcmpData"===
+b.message&&(window.localStorage.removeItem("mcmpfreqrec"),n("mcmpfreqrec")&&(document.cookie="".concat("mcmpfreqrec=","; SameSite=None; Secure; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"))));};try{window.addEventListener("message",D);}catch(a){console.warn(a);}})();</script></head><body data-new-gr-c-s-check-loaded="14.1157.0" data-gr-ext-installed=""></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

@@ -592,6 +592,23 @@ labs(title = "Iris Flower Sepal Length",
 	x = "Sepal Length",
 	y = "Measure")
 ```
+```{r}
+# Histogram plot for iris$Sepal.Width
+ggplot(data = iris, aes(x = Sepal.Width)) +
+geom_histogram() +
+labs(title = "Iris Flower Sepal Width",
+	x = "Sepal Width",
+	y = "Flower Count")
+```
+
+```{r iris, echo=FALSE}
+# Histogram plot for iris$Petal.Width
+ggplot(data = iris, aes(x = Petal.Width)) +
+geom_histogram() +
+labs(title = "Iris Flower Petal Width",
+	x = "Petal Width",
+	y = "Flower Count")
+```
 
 
 ```{r}
