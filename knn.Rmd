@@ -1,0 +1,202 @@
+---
+title: "knn"
+author: "Dr. Naveen Kumar"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Understanding the Concept of KNN Algorithm Using R
+
+`Machine learning` is a subset of `Artificial Intelligence` that provides machines the power to find out automatically and improve from their gained experience without being explicitly programmed.
+
+Three types of Machine Learning:
+
+## 1. Supervised Learning:
+
+Machine Learning in which the data provided for teaching or training the machine is well `labeled` and so it becomes easy to work with it.
+
+## 2. Unsupervised Learning:
+
+Training of information using a machine that is `unlabelled` and allowing the algorithm to act on that information without guidance.
+
+## 3. Reinforcement Learning:
+
+It is that part of Machine Learning where an `agent` is put in an environment and he learns to behave by performing certain actions and observing the various possible outcomes which it gets from those actions.
+
+# K Nearest Neighbor Algorithm?
+
+-   `KNN` stands for `K Nearest Neighbor` is a `Supervised Machine Learning` algorithm that `classifies` a new data point into the target class, counting on the features of its neighboring data points.
+
+-   popular machine learning technique used for classification and regression tasks.
+
+-   It relies on the idea that similar data points tend to have similar labels or values.
+
+-   During the training phase, the KNN algorithm stores the entire training dataset as a reference.
+
+-   When making predictions, it calculates the `distance` between the input data point and all the training examples, using a chosen distance metric such as `Euclidean` distance.
+
+-   Next, the algorithm identifies the `K nearest neighbors` to the input data point based on their distances.
+
+-   In the case of classification, the algorithm assigns the most common class label among the K neighbors as the predicted label for the input data point.
+
+For regression, it calculates the average or weighted average of the target values of the K neighbors to predict the value for the input data point.
+
+we want a machine to distinguish between the sentiment of tweets posted by various users. To do this we must input a dataset of users' sentiment(comments).\
+And now, we have to train our model to detect the sentiments based on certain features such as labeled tweet sentiment i.e., as `positive` or `negative` tweets accordingly. If a tweet is `positive`, it is labeled as `1`and if `negative`, then labeled as `0`.
+
+-   The KNN algorithm is `straightforward and easy to understand`, making it a popular choice in various domains. - However, its performance can be affected by the `choice of K` and the `distance metric`, so careful parameter tuning is necessary for optimal results.
+
+## When to use KNN
+
+-   KNN Algorithm can be used for both classification and regression predictive problems.
+-   However, it is more widely used in classification problems in the industry.
+-   To evaluate any technique, we generally look at 3 important aspects:
+
+1.  Ease of interpreting output
+
+2.  Calculation time
+
+3.  Predictive Power
+
+## Features of KNN algorithm:
+
+KNN is a `supervised learning algorithm`, based on `feature similarity`.
+
+Unlike most algorithms, KNN is a non-parametric model which means it does not make any assumptions about the data set. This makes the algorithm simpler and effective since it can handle realistic data.
+
+KNN is considered to be a `lazy algorithm`, i.e., it suggests that it memorizes the training data set rather than learning a discriminative function from the training data.
+
+KNN is often used for solving both `classification` and `regression` problems.
+
+<https://excelrcom.b-cdn.net/assets/admin/ckfinder/userfiles/images/2020%20uploads/10/1.PNG>
+
+<https://excelrcom.b-cdn.net/assets/admin/ckfinder/userfiles/images/2020%20uploads/10/2.PNG>
+
+<https://excelrcom.b-cdn.net/assets/admin/ckfinder/userfiles/images/2020%20uploads/10/3.PNG>
+
+Step 1: Import the dataset and then look at the structure of the dataset:
+
+```{r}
+# Read data
+data1 = read.csv("US Presidential Data.csv")
+View(data1)
+```
+
+Step 2: Data Cleaning
+
+```{r}
+# load library
+library(caret)
+library(e1071)
+# Transforming the dependent variable to a factor
+data1$Win.Loss = as.factor(data1$Win.Loss)
+```
+
+Step 3: Data Normalization
+
+```{r}
+#Partitioning the data into training and validation data
+set.seed(101)
+index = createDataPartition(data1$Win.Loss, p = 0.7, list = F )
+train = data1[index,]
+validation = data1[-index,]
+```
+
+Step 4: Data Splicing
+
+```{r}
+# Explore data
+dim(train)
+dim(validation)
+names(train)
+head(train)
+head(validation)
+
+```
+
+Step 5: Building a Machine Learning model
+
+```{r}
+# Setting levels for both training and validation data
+levels(train$Win.Loss) <- make.names(levels(factor(train$Win.Loss)))
+levels(validation$Win.Loss) <- make.names(levels(factor(validation$Win.Loss)))
+```
+
+Step 6: Model Evaluation
+
+```{r}
+# Setting up train controls
+repeats = 3
+numbers = 10
+tunel = 10
+set.seed(1234)
+x = trainControl(method = "repeatedcv",
+                 number = numbers,
+                 repeats = repeats,
+                 classProbs = TRUE,
+                 summaryFunction = twoClassSummary)
+```
+
+```{r}
+model1 <- train(Win.Loss~. , data = train, method = "knn",
+               preProcess = c("center","scale"),
+               trControl = x,
+               metric = "ROC",
+               tuneLength = tunel)
+# Summary of model
+model1
+plot(model1)
+```
+
+```{r}
+# Validation
+valid_pred <- predict(model1,validation, type = "prob")
+#Storing Model Performance Scores
+library(ROCR)
+pred_val <-prediction(valid_pred[,2],validation$Win.Loss)
+# Calculating Area under Curve (AUC)
+perf_val <- performance(pred_val,"auc")
+perf_val
+# Plot AUC
+perf_val <- performance(pred_val, "tpr", "fpr")
+plot(perf_val, col = "green", lwd = 1.5)
+#Calculating KS statistics
+ks <- max(attr(perf_val, "y.values")[[1]] - (attr(perf_val, "x.values")[[1]]))
+ks
+```
+
+# Introduction to K Nearest Neighbor
+
+widely used machine learning classification technique called the k-nearest neighbors (KNN) algorithm. How the algorithm works on new data and how the input parameter affects the output/prediction.
+
+## Learning Objectives
+
+-   Understand the working of KNN and how it operates in R.
+-   Get to know how to choose the right value of k for KNN
+-   Understand the difference between training error rate and validation error rate.
+
+| ![KNN Visually](https://cdn.analyticsvidhya.com/wp-content/uploads/2018/03/knn3.png) |
+|:------------------------------------------------------------------------------------:|
+|                                     KNN Visually                                     |
+
+## Pseudo Code of KNN
+
+We can implement a KNN model by following the below steps:
+
+1.  Load the data
+2.  Initialise the value of k
+3.  For getting the predicted class, iterate from 1 to total number of training data points
+
+-   Calculate the distance between test data and each row of training dataset. Here we will use `Euclidean distance` as distance metric since it's the most popular method. The other distance function or metrics that can be used are `Manhattan distance`, `Minkowski distance`, `Chebyshev`, `cosine`, etc. If there are categorical variables, `hamming distance` can be used.
+-   Sort the calculated distances in ascending order based on distance values
+-   Get top k rows from the sorted array
+-   Get the most frequent class of these rows
+-   Return the predicted class
+
+| ![KNN Visually](https://media.geeksforgeeks.org/wp-content/uploads/20230913114022/Types-of-Machine-Leaning-(3).gif) |
+|:-------------------------------------------------------------------------------------------------------------------:|
+|                                                    KNN Visually                                                     |

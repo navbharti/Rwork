@@ -167,3 +167,10 @@ summary(mouse.regression)
 ## add the regression line to our x/y scatter plot
 abline(mouse.regression, col="blue")
 ```
+
+# Multi linear Regress
+```{r}
+model<-lm(iris$Species ~ iris$Sepal.Length)
+
+str(model)
+```
